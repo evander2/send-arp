@@ -64,7 +64,7 @@ void send_arp(char *dev, char *sip, char *tip, char *mip, char *mmac) {
 	const u_char* tpacket;
 	res = 0;
 	res = pcap_next_ex(handle, &header, &tpacket);
-	if (res != 0) {
+	if (res == PCAP_ERROR || res == PCAP_ERROR_BREAK) {
 		fprintf(stderr, "pcap_next_ex return %d(%s)\n", res, pcap_geterr(handle));
 		exit(-1);
 	}
